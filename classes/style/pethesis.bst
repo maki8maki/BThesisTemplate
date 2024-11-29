@@ -3055,22 +3055,23 @@ FUNCTION {format.chapter.pages}
 
 %%% editor and booktitle の整形。
 FUNCTION {format.in.ed.booktitle}
-{ journal empty$
-  % booktitle empty$
+{
+  % journal empty$
+  booktitle empty$
     { "" }
     { editor empty$
 	{ is.kanji.entry
-	    % { format.btitle remove.pre.comma.period }
-	    % { bst.in format.btitle * }
-      { format.journal remove.pre.comma.period }
-	    { bst.in format.journal * }
+	    { format.btitle remove.pre.comma.period }
+	    { bst.in format.btitle * }
+      % { format.journal remove.pre.comma.period }
+	    % { bst.in format.journal * }
 	  if$
 	}
 	{ is.kanji.entry
-	    % { format.editors.x "" * format.btitle * }
-	    % { bst.in format.editors.x * " " * format.btitle * }
-      { format.editors.x "" * format.journal * }
-	    { bst.in format.editors.x * " " * format.journal * }
+	    { format.editors.x "" * format.btitle * }
+	    { bst.in format.editors.x * " " * format.btitle * }
+      % { format.editors.x "" * format.journal * }
+	    % { bst.in format.editors.x * " " * format.journal * }
 	  if$
 	}
       if$

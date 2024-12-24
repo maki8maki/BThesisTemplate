@@ -2911,17 +2911,9 @@ FUNCTION {format.pages}
 { pages empty$
     { "" }
     { is.kanji.entry
-	{ pages multi.page.check
 	  { bst.pages.pre.jp pages n.dashify convert.num.pages * bst.pages.post.jp * }
-	  { bst.page.pre.jp pages convert.num.pages * bst.page.post.jp * }
-	 if$
-	}
-	{ pages multi.page.check
 	  { bst.pages.pre pages * n.dashify * bst.pages.post }
-	  { bst.page.pre pages * bst.page.post }
-	 if$
-	}
-       if$
+    if$
    }
  if$
 }
@@ -3017,6 +3009,19 @@ FUNCTION {format.vol.num.pages}
   if$
 }
 
+%%%	access の整形
+FUNCTION {format.access}
+{ access empty$
+    { "" }
+    { is.kanji.entry
+        { bst.access.pre.jp access * bst.access.post.jp * }
+        { bst.access.pre access * bst.access.post * }
+      if$
+    }
+  if$
+}
+
+
 %%% chapter の整形。
 FUNCTION {format.chapter}
 { chapter empty$
@@ -3055,23 +3060,22 @@ FUNCTION {format.chapter.pages}
 
 %%% editor and booktitle の整形。
 FUNCTION {format.in.ed.booktitle}
-{
-  % journal empty$
-  booktitle empty$
+{ journal empty$
+  % booktitle empty$
     { "" }
     { editor empty$
 	{ is.kanji.entry
-	    { format.btitle remove.pre.comma.period }
-	    { bst.in format.btitle * }
-      % { format.journal remove.pre.comma.period }
-	    % { bst.in format.journal * }
+	    % { format.btitle remove.pre.comma.period }
+	    % { bst.in format.btitle * }
+      { format.journal remove.pre.comma.period }
+	    { bst.in format.journal * }
 	  if$
 	}
 	{ is.kanji.entry
-	    { format.editors.x "" * format.btitle * }
-	    { bst.in format.editors.x * " " * format.btitle * }
-      % { format.editors.x "" * format.journal * }
-	    % { bst.in format.editors.x * " " * format.journal * }
+	    % { format.editors.x "" * format.btitle * }
+	    % { bst.in format.editors.x * " " * format.btitle * }
+      { format.editors.x "" * format.journal * }
+	    { bst.in format.editors.x * " " * format.journal * }
 	  if$
 	}
       if$
@@ -3768,6 +3772,8 @@ FUNCTION {web_page}
   % if$
 
   format.url.doi output.nocomma
+
+  format.access output.nocomma
 
   format.note output.nocomma
   fin.entry

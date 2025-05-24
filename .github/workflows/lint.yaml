@@ -25,7 +25,7 @@ jobs:
       - name: textlint-github-pr-review
         uses: tsuyoshicho/action-textlint@v3
         with:
-          github_token: ${{ secrets.REVIEWDOG_GITHUB_API_TOKEN }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
           reporter: github-pr-review
           level: error
           fail_on_error: true
